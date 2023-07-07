@@ -1,6 +1,6 @@
-<% if params[:cpmment_id].present? %>
+<% if params[:comment_id].present? %>
     <%= turbo_frame_tag "comment-likes" do %>
-      <%= button_to "", post_comment_like_path(@post, @comment), class: "post-actions-like" %>
+      <%= button_to "", post_comment_likes_path(@post, @comment), class: "post-actions-like" %>
     <% end %>
 <% else %>
     <%= turbo_frame_tag "post-likes" do %>

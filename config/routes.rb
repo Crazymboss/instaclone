@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   resources :posts, only: [:create, :new] do
     resources :comments, only: [:create, :new] do
-      resources :likes, only: [:create, :destroy]
+      resources :likes, only: :create do
+        collection do
+          delete :destroy
+        end
+      end
     end
     resources :likes, only: :create do
       collection do

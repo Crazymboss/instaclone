@@ -4,7 +4,7 @@
     <%= comment.body %>
       <%= turbo_frame_tag "comment-likes" do %>
         <% if current_user.likes.find_by(likeable_id: comment.id, likeable_type: comment.class.name).present? %>
-            <%= button_to "", post_comment_likes_path(post, comment), class: "post-actions-unlike" %>
+            <%= button_to "", post_comment_likes_path(post, comment), class: "post-actions-unlike", method: :delete %>
         <% else %>
             <%= button_to "", post_comment_likes_path(post, comment), class: "post-actions-like" %>
         <% end %>
