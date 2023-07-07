@@ -1,4 +1,10 @@
-<%= turbo_frame_tag "post-likes" do %>
-  <%= button_to "", post_likes_path(@post), class: "post-actions-like" %>
-  <%= pluralize(@post.likes.count, "like") %>
-<% end %>
+<% if params[:cpmment_id].present? %>
+    <%= turbo_frame_tag "comment-likes" do %>
+      <%= button_to "", post_comment_like_path(@post, @comment), class: "post-actions-like" %>
+    <% end %>
+<% else %>
+    <%= turbo_frame_tag "post-likes" do %>
+      <%= button_to "", post_likes_path(@post), class: "post-actions-like" %>
+      <%= pluralize(@post.likes.count, "like") %>
+    <% end %>
+<%end %>

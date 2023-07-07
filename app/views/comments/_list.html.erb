@@ -1,7 +1,13 @@
 <% post.comments.each do |comment| %>
   <div class="comment">
-    <%= button_to "", post_comment_likes_path(post, comment), class: "post-actions-like" %>
     <span class="comment-author"><%= comment.user.username %></span>
     <%= comment.body %>
+      <%= turbo_frame_tag "comment-likes" do %>
+        <% if current_user.likes.find_by(likeable_id: comment.id, likeable_type: comment.class.name).present? %>
+            <%= button_to "", post_comment_likes_path(post, comment), class: "post-actions-unlike" %>
+        <% else %>
+            <%= button_to "", post_comment_likes_path(post, comment), class: "post-actions-like" %>
+        <% end %>
+      <% end %>
   </div>
 <% end %>

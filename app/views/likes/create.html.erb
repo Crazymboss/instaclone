@@ -1,5 +1,14 @@
-<%= turbo_frame_tag "post-likes" do %>
-  <%= button_to "", post_likes_path(@post), class: "post-actions-unlike", method: :delete %>
-  <%= pluralize(@post.likes.count, "like") %>
+
+
+<% if params[:comment_id].present? %>
+    <%= turbo_frame_tag "comment-likes" do %>
+      <%= button_to "", post_comment_likes_path(@post, @comment), class: "post-actions-unlike", method: :delete %>
+    <% end %>
+<% else %>
+    <%= turbo_frame_tag "post-likes" do %>
+      <%= button_to "", post_likes_path(@post), class: "post-actions-unlike", method: :delete %>
+      <%= pluralize(@post.likes.count, "like") %>
+    <% end %>
+
 <% end %>
 
